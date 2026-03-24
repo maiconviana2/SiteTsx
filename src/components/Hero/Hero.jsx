@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useTranslation } from 'react-i18next'
 import './Hero.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -10,6 +11,7 @@ const HERO_BG = 'https://tsx.com.br/wp-content/uploads/2022/08/cabecalho-TSX-Gro
 const TSX_LOGO = 'https://tsx.com.br/wp-content/uploads/2022/08/cropped-Logo-TSX-Group-bca.png'
 
 export default function Hero() {
+  const { t } = useTranslation()
   const heroRef    = useRef(null)
   const bgImgRef   = useRef(null)
   const headlineRef = useRef(null)
@@ -115,30 +117,28 @@ export default function Hero() {
             alt="TSX Group"
             className="hero__logo-img"
           />
-          <span className="hero__label-since">Desde 1994</span>
+          <span className="hero__label-since">{t('hero.label').split('·')[1]}</span>
         </div>
 
         <h1 className="hero__headline" ref={headlineRef}>
-          Transformando <br />
-          <em className="text-gold">ideais estratégicos</em><br />
-          em realidade.
+          {t('hero.headlineP1')} <br />
+          <em className="text-gold">{t('hero.headlineHighlight')}</em><br />
+          {t('hero.headlineP2')}
         </h1>
 
         <p className="hero__subheadline" ref={subheadlineRef}>
-          Grupo multidisciplinar com mais de 30 anos de história, unindo
-          expertise em Assessoria, Engenharia, Internacional e Investimentos
-          para transformar negócios complexos em resultados concretos.
+          {t('hero.subheadline')}
         </p>
 
         <div className="hero__cta" ref={ctaRef}>
-          <a href="#unidades" className="btn btn--primary">Conheça o Grupo</a>
-          <a href="#sobre"    className="btn btn--outline">Nossa História</a>
+          <a href="#unidades" className="btn btn--primary">{t('hero.ctaPrimary')}</a>
+          <a href="#sobre"    className="btn btn--outline">{t('hero.ctaOutline')}</a>
         </div>
       </div>
 
       {/* ─── Scroll indicator ─── */}
       <div className="hero__scroll-indicator" ref={scrollIndicatorRef} aria-hidden="true">
-        <span className="hero__scroll-text">Scroll</span>
+        <span className="hero__scroll-text">{t('hero.scroll')}</span>
         <div className="hero__scroll-line"></div>
       </div>
 
@@ -148,17 +148,17 @@ export default function Hero() {
           <div className="hero__stats">
             <div className="hero__stat">
               <span className="hero__stat-value">+30</span>
-              <span className="hero__stat-label">anos de história</span>
+              <span className="hero__stat-label">{t('hero.stats.years')}</span>
             </div>
             <div className="hero__stat-divider" />
             <div className="hero__stat">
               <span className="hero__stat-value">4</span>
-              <span className="hero__stat-label">unidades de negócio</span>
+              <span className="hero__stat-label">{t('hero.stats.units')}</span>
             </div>
             <div className="hero__stat-divider" />
             <div className="hero__stat">
               <span className="hero__stat-value">Global</span>
-              <span className="hero__stat-label">presença internacional</span>
+              <span className="hero__stat-label">{t('hero.stats.global')}</span>
             </div>
           </div>
         </div>

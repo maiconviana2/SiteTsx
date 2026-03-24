@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import Navbar from '../components/Navbar/Navbar'
 import Hero from '../components/Hero/Hero'
 import UnitsPin from '../components/UnitsPin/UnitsPin'
@@ -9,6 +10,11 @@ import Contact from '../components/Contact/Contact'
 import './Home.css'
 
 export default function Home() {
+  const { t, i18n } = useTranslation()
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'pt' ? 'en' : 'pt')
+  }
   return (
     <>
       <Navbar />
@@ -22,23 +28,13 @@ export default function Home() {
               <div className="sobre__text">
                 <div className="gold-line"></div>
                 <h2 className="sobre__title">
-                  Um grupo construído <br />
-                  para <em className="text-gold">resultados reais</em>
+                  {t('about.titleP1')} <br />
+                  {t('about.titleP2')} <em className="text-gold">{t('about.titleHighlight')}</em>
                 </h2>
-                <p>
-                  O TSX Group nasceu em 1994 com uma convicção simples: empresas
-                  complexas merecem soluções igualmente sofisticadas. Ao longo de
-                  três décadas, construímos um ecossistema de quatro unidades
-                  complementares, capazes de resolver os desafios mais críticos
-                  dos nossos clientes de forma integrada.
-                </p>
-                <p>
-                  Mais do que consultores, somos parceiros estratégicos com pele
-                  no jogo — alinhando interesses, assumindo compromissos e
-                  entregando resultados mensuráveis.
-                </p>
+                <p>{t('about.p1')}</p>
+                <p>{t('about.p2')}</p>
                 <a href="#unidades" className="btn btn--outline" style={{ marginTop: 'var(--space-6)' }}>
-                  Conheça as unidades
+                  {t('about.cta')}
                 </a>
               </div>
               <div className="sobre__visual" aria-hidden="true">
@@ -77,35 +73,41 @@ export default function Home() {
                 <em>TSX</em> Group
               </span>
               <p className="footer__tagline">
-                Transformando ideais estratégicos em realidade.
+                {t('footer.tagline')}
               </p>
             </div>
             <nav className="footer__nav" aria-label="Links do rodapé">
               <div className="footer__nav-col">
-                <span className="footer__nav-title">Unidades</span>
+                <span className="footer__nav-title">{t('footer.units')}</span>
                 <a href="#">TSX Advisors</a>
                 <a href="#">TSX Engineering</a>
                 <a href="#">TSX International</a>
                 <a href="#">TSX Invest</a>
               </div>
               <div className="footer__nav-col">
-                <span className="footer__nav-title">Empresa</span>
-                <a href="#">Sobre nós</a>
-                <a href="#">Nossa história</a>
-                <a href="#">Trabalhe conosco</a>
-                <a href="#">Insights</a>
+                <span className="footer__nav-title">{t('footer.company')}</span>
+                <a href="#">{t('footer.aboutUs')}</a>
+                <a href="#">{t('footer.history')}</a>
+                <a href="#">{t('footer.careers')}</a>
+                <a href="#">{t('footer.insights')}</a>
               </div>
               <div className="footer__nav-col">
-                <span className="footer__nav-title">Legal</span>
-                <a href="#">Privacidade</a>
-                <a href="#">Termos de uso</a>
-                <a href="#">Cookies</a>
+                <span className="footer__nav-title">{t('footer.legal')}</span>
+                <a href="#">{t('footer.privacy')}</a>
+                <a href="#">{t('footer.terms')}</a>
+                <a href="#">{t('footer.cookies')}</a>
               </div>
             </nav>
           </div>
           <div className="footer__bottom">
-            <p>© 2025 TSX Group. Todos os direitos reservados.</p>
-            <span className="footer__lang">PT / EN</span>
+            <p>{t('footer.rights')}</p>
+            <button 
+              className="footer__lang" 
+              onClick={toggleLanguage}
+              style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', fontFamily: 'inherit', fontWeight: '500' }}
+            >
+              {i18n.language === 'pt' ? 'PT / EN' : 'EN / PT'}
+            </button>
           </div>
         </div>
       </footer>

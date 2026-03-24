@@ -1,16 +1,10 @@
 import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useTranslation } from 'react-i18next'
 import './Numbers.css'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const stats = [
-  { value: 30, suffix: '+', label: 'Anos de experiência', description: 'Uma história de três décadas construída com resultado' },
-  { value: 500, suffix: '+', label: 'Clientes atendidos', description: 'Empresas de todos os portes e segmentos' },
-  { value: 4,   suffix: '',  label: 'Unidades de negócio', description: 'Advisors, Engineering, International e Invest' },
-  { value: 3,   suffix: '',  label: 'Continentes', description: 'Presença e atuação global integrada' },
-]
 
 function animateCounter(el, target, duration = 2) {
   let start = 0
@@ -27,6 +21,15 @@ function animateCounter(el, target, duration = 2) {
 }
 
 export default function Numbers() {
+  const { t } = useTranslation()
+
+  const stats = [
+    { value: 30, suffix: '+', label: t('hero.stats.years'), description: t('numbers.yearsDesc') },
+    { value: 500, suffix: '+', label: 'Clientes', description: t('numbers.clientsDesc') },
+    { value: 4,   suffix: '',  label: t('hero.stats.units'), description: t('numbers.unitsDesc') },
+    { value: 3,   suffix: '',  label: 'Continentes', description: t('numbers.continentsDesc') },
+  ]
+
   const sectionRef = useRef(null)
   const numbersRef = useRef([])
   const hasAnimated = useRef(false)
@@ -65,7 +68,8 @@ export default function Numbers() {
         <div className="numbers__header">
           <div className="gold-line"></div>
           <h2 className="numbers__title">
-            TSX em <em className="text-gold">Números</em>
+            {t('numbers.titleP1')} <em className="text-gold">{t('numbers.titleHighlight')}</em> <br />
+            {t('numbers.titleP2')} <em className="text-gold">{t('numbers.titleHighlight2')}</em>
           </h2>
         </div>
 

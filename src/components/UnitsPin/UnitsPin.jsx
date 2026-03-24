@@ -1,58 +1,57 @@
 import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useTranslation } from 'react-i18next'
 import './UnitsPin.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const units = [
-  {
-    id: 'advisors',
-    name: 'TSX Advisors',
-    tag: 'Assessoria Estratégica & Fiscal',
-    description:
-      'Consultoria de alto nível em planejamento tributário, reestruturação societária e assessoria financeira. 30 anos construindo estruturas que protegem patrimônios e maximizam resultados.',
-    highlight: '30 anos de estruturação fiscal',
-    color: '#C9A84C',
-    number: '01',
-    bg: 'https://tsx.com.br/wp-content/uploads/2022/09/cabecalho-TSX-Group-gente.jpg',
-  },
-  {
-    id: 'engineering',
-    name: 'TSX Engineering',
-    tag: 'Engenharia & Projetos',
-    description:
-      'Soluções de engenharia integradas para projetos de infraestrutura complexa. Do conceito à entrega, com rigor técnico e gestão de ponta.',
-    highlight: 'Projetos de grande escala',
-    color: '#4C8EC9',
-    number: '02',
-    bg: 'https://tsx.com.br/wp-content/uploads/2022/09/cabecalho-TSX-Group-gente.jpg',
-  },
-  {
-    id: 'international',
-    name: 'TSX International',
-    tag: 'Expansão Global',
-    description:
-      'Estruturação de operações internacionais, abertura de empresas no exterior e consultoria tributária cross-border. Presença ativa em 3 continentes.',
-    highlight: 'Presença em 3 continentes',
-    color: '#4CC97B',
-    number: '03',
-    bg: 'https://tsx.com.br/wp-content/uploads/2022/09/cabecalho-TSX-Group-gente.jpg',
-  },
-  {
-    id: 'invest',
-    name: 'TSX Invest',
-    tag: 'Gestão de Patrimônio',
-    description:
-      'Gestão patrimonial e alocação de investimentos com visão de longo prazo. Performance consistente, proteção de capital e acesso a oportunidades exclusivas.',
-    highlight: 'Retornos acima do mercado',
-    color: '#C94C8E',
-    number: '04',
-    bg: 'https://tsx.com.br/wp-content/uploads/2022/09/cabecalho-TSX-Group-gente.jpg',
-  },
-]
-
 export default function UnitsPin() {
+  const { t } = useTranslation()
+
+  const units = [
+    {
+      id: 'advisors',
+      name: 'TSX Advisors',
+      tag: t('units.advisors.tag'),
+      description: t('units.advisors.desc'),
+      highlight: t('units.advisors.highlight'),
+      color: '#C9A84C',
+      number: '01',
+      bg: 'https://tsx.com.br/wp-content/uploads/2022/09/cabecalho-TSX-Group-gente.jpg',
+    },
+    {
+      id: 'engineering',
+      name: 'TSX Engineering',
+      tag: t('units.engineering.tag'),
+      description: t('units.engineering.desc'),
+      highlight: t('units.engineering.highlight'),
+      color: '#4C8EC9',
+      number: '02',
+      bg: 'https://tsx.com.br/wp-content/uploads/2022/09/cabecalho-TSX-Group-gente.jpg',
+    },
+    {
+      id: 'international',
+      name: 'TSX International',
+      tag: t('units.international.tag'),
+      description: t('units.international.desc'),
+      highlight: t('units.international.highlight'),
+      color: '#4CC97B',
+      number: '03',
+      bg: 'https://tsx.com.br/wp-content/uploads/2022/09/cabecalho-TSX-Group-gente.jpg',
+    },
+    {
+      id: 'invest',
+      name: 'TSX Invest',
+      tag: t('units.invest.tag'),
+      description: t('units.invest.desc'),
+      highlight: t('units.invest.highlight'),
+      color: '#C94C8E',
+      number: '04',
+      bg: 'https://tsx.com.br/wp-content/uploads/2022/09/cabecalho-TSX-Group-gente.jpg',
+    },
+  ]
+
   const containerRef = useRef(null)
   const stickyRef    = useRef(null)
   const panelsRef    = useRef([])
@@ -102,7 +101,7 @@ export default function UnitsPin() {
     <section id="unidades-pin" className="units-pin" ref={containerRef}>
       {/* Label lateral */}
       <div className="units-pin__label" aria-hidden="true">
-        <span>Nossas Unidades</span>
+        <span>{t('units.label')}</span>
       </div>
 
       {/* Track horizontal */}
@@ -133,7 +132,7 @@ export default function UnitsPin() {
                 "{unit.highlight}"
               </blockquote>
               <a href={`#${unit.id}`} className="btn btn--outline units-pin__link">
-                Saiba mais
+                {t('units.more')}
               </a>
             </div>
           </div>

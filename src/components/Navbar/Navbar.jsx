@@ -1,31 +1,30 @@
 import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useTranslation } from 'react-i18next'
 import './Navbar.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const navLinks = [
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Unidades', href: '#unidades' },
-  { label: 'Insights', href: '#insights' },
-  { label: 'Contato', href: '#contato' },
-]
-
 export default function Navbar() {
   const navRef = useRef(null)
+  const { t, i18n } = useTranslation()
+
+  const navLinks = [
+    { label: t('nav.about'), href: '#sobre' },
+    { label: t('nav.units'), href: '#unidades' },
+    { label: t('nav.insights'), href: '#insights' },
+    { label: t('nav.contact'), href: '#contato' },
+  ]
 
   useEffect(() => {
     const nav = navRef.current
-
-    // Transição navbar: transparente → sólido ao scroll
     ScrollTrigger.create({
       start: 'top -80',
       onEnter: () => nav.classList.add('navbar--scrolled'),
       onLeaveBack: () => nav.classList.remove('navbar--scrolled'),
     })
-
-    return () => ScrollTrigger.getAll().forEach(t => t.kill())
+    return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill())
   }, [])
 
   const handleScrollTo = (e, href) => {
@@ -34,6 +33,12 @@ export default function Navbar() {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' })
     }
+  }
+
+  const toggleLanguage = (e) => {
+    e.preventDefault()
+    const newLang = i18n.language === 'pt' ? 'en' : 'pt'
+    i18n.changeLanguage(newLang)
   }
 
   return (
@@ -62,8 +67,16 @@ export default function Navbar() {
 
         {/* Navegação secundária */}
         <div className="navbar__secondary">
-          <a href="#" className="navbar__lang">PT <span>/ EN</span></a>
-          <a href="#contato" className="btn btn--primary navbar__cta">Fale Conosco</a>
+          <button onClick={toggleLanguage} className="navbar__lang-btn" aria-label="Mudar idioma">
+            {i18n.language === 'pt' ? (
+              <>PT <span>/ EN</span></>
+            ) : (
+              <><span>PT /</span> EN</>
+            )}
+          </button>
+          <a href="#contato" className="btn btn--primary navbar__cta">
+            {t('nav.cta')}
+          </a>
         </div>
 
         {/* Hambúrguer mobile */}
