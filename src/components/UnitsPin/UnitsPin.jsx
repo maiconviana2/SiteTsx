@@ -79,17 +79,15 @@ export default function UnitsPin() {
       })
 
       // ScrollTrigger do pin: pineia o container e anima horizontalmente
-      const totalWidth = stickyRef.current.scrollWidth
-      const viewWidth  = stickyRef.current.offsetWidth
-
+      // Move a trilha (track) para a esquerda com base na quantidade de itens (xPercent)
       gsap.to(stickyRef.current, {
-        x: -(totalWidth - viewWidth),
+        xPercent: -100 * (units.length - 1) / units.length,
         ease: 'none',
         scrollTrigger: {
           id: 'units-h-scroll',
           trigger: containerRef.current,
           start: 'top top',
-          end: () => `+=${totalWidth - viewWidth}`,
+          end: () => `+=${window.innerWidth * units.length}`,
           scrub: 1,
           pin: true,
           anticipatePin: 1,
